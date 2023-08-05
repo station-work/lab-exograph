@@ -1,0 +1,73 @@
+context AuthContext {
+  @jwt role: String
+  @jwt("sub") id: Int
+  @jwt email: String
+}
+
+@postgres
+module StationWorkDatabase {
+
+  type Document {
+    @pk id: Int = autoIncrement()
+    name: String
+    file: String
+  }
+
+/*
+type File {
+    @pk id: Uuid = generate_uuid()
+    name: String
+    url: String
+    date: LocalDateTime
+  }
+
+  
+
+  type Production {
+    @pk id: Uuid = generate_uuid()
+    date: LocalDate
+    file: File
+  }
+
+  type Amount {
+    @pk id: Int = autoIncrement()
+    @precision(5) @scale(2) value: Decimal
+    currency: Currency
+    production: Production
+  }
+
+  type Currency {
+    @pk id: Int = autoIncrement()
+    coutry: String
+    simbol: String
+    name: String
+    amunt: Amount
+  }
+
+  type Meeting {
+    @pk id: Uuid = generate_uuid()
+    place: String
+    mode: ModeMeeting
+    files: Set<File>
+    date: LocalDateTime
+  }
+
+  type ModeMeeting {
+    @pk id: Int = autoIncrement()
+    name: String
+    meeting: Meeting
+  }
+  type MessageBoard {
+    @pk id: Uuid = generate_uuid()
+    message: Message
+  }
+
+  type Message {
+    @pk id: Uuid = generate_uuid()
+    title: String
+    content: String
+    date: LocalDateTime
+    message_board: MessageBoard
+  }
+  */
+}
