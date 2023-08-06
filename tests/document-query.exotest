@@ -1,0 +1,18 @@
+operation: |
+  query {
+      documents(orderBy: {name: ASC}) {
+          id
+          name
+      }
+  }
+response: |
+  {
+    "data": {
+      "documents": [
+        {
+          "id": $.t1id,
+          "name": "Document 1",
+        },
+      ]
+    }
+  }

@@ -1,34 +1,36 @@
-context AuthContext {
-  @jwt role: String
-  @jwt("sub") id: Int
-  @jwt email: String
-}
-
 @postgres
 module StationWorkDatabase {
+  type Astronault {
+    @pk id: Uuid = generate_uuid()
+    name: String
+    productions: Set<Production>?
+  }
 
+  @access(true)
   type Document {
     @pk id: Int = autoIncrement()
     name: String
-    file: String
+    file: FileDocument?
   }
 
-/*
-type File {
-    @pk id: Uuid = generate_uuid()
+  @access(true)
+  type FileDocument {
+    @pk id: Int = autoIncrement()
     name: String
     url: String
     date: LocalDateTime
+    document: Document
   }
 
-  
-
+  @access(true)
   type Production {
     @pk id: Uuid = generate_uuid()
     date: LocalDate
-    file: File
+    astronault: Astronault
+    amounts: Set<Amount>?
   }
 
+  @access(true)
   type Amount {
     @pk id: Int = autoIncrement()
     @precision(5) @scale(2) value: Decimal
@@ -36,32 +38,38 @@ type File {
     production: Production
   }
 
+  @access(true)
   type Currency {
     @pk id: Int = autoIncrement()
     coutry: String
     simbol: String
     name: String
-    amunt: Amount
+    amounts: Set<Amount>?
   }
 
+  @access(true)
   type Meeting {
     @pk id: Uuid = generate_uuid()
+    title: String
     place: String
     mode: ModeMeeting
-    files: Set<File>
     date: LocalDateTime
   }
 
+  @access(true)
   type ModeMeeting {
     @pk id: Int = autoIncrement()
     name: String
-    meeting: Meeting
-  }
-  type MessageBoard {
-    @pk id: Uuid = generate_uuid()
-    message: Message
+    meetings: Set<Meeting>?
   }
 
+  @access(true)
+  type MessageBoard {
+    @pk id: Uuid = generate_uuid()
+    messages: Set<Message>?
+  }
+
+  @access(true)
   type Message {
     @pk id: Uuid = generate_uuid()
     title: String
@@ -69,5 +77,4 @@ type File {
     date: LocalDateTime
     message_board: MessageBoard
   }
-  */
 }

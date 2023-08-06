@@ -1,15 +1,13 @@
 operation: |
     mutation {
-        t1: createTodo(data: {title: "T1", completed: true}) {
+        t1: createDocument(data: {
+            name: "Document 1",
+            file: {
+                name: "document-1.pdf",
+                date: "2021-07-06T20:08:47",
+                url: "http://local.url/document-1.pdf"
+            }
+        }) {
             id @bind(name: "t1id")
-        }
-        t2: createTodo(data: {title: "T2", completed: false}) {
-            id @bind(name: "t2id")
-        }
-        t3: createTodo(data: {title: "T3", completed: true}) {
-            id @bind(name: "t3id")
-        }
-        t4: createTodo(data: {title: "T4", completed: false}) {
-            id @bind(name: "t4id")
         }
     }
