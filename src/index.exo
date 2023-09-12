@@ -1,19 +1,28 @@
 @postgres
 module StationWorkDatabase {
+  @access(query=true, mutation=true, update=false)
+  type Company {
+    @pk id: Uuid = generate_uuid()
+    name: String
+    astronaults: Astronault?
+  }
+  
+  @access(query=true, mutation=true, update=false)
   type Astronault {
     @pk id: Uuid = generate_uuid()
     name: String
     productions: Set<Production>?
+    company: Company
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type Document {
     @pk id: Int = autoIncrement()
     name: String
     file: FileDocument?
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type FileDocument {
     @pk id: Int = autoIncrement()
     name: String
@@ -22,7 +31,7 @@ module StationWorkDatabase {
     document: Document
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type Production {
     @pk id: Uuid = generate_uuid()
     date: LocalDate
@@ -30,7 +39,7 @@ module StationWorkDatabase {
     amounts: Set<Amount>?
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type Amount {
     @pk id: Int = autoIncrement()
     @precision(5) @scale(2) value: Decimal
@@ -38,7 +47,7 @@ module StationWorkDatabase {
     production: Production
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type Currency {
     @pk id: Int = autoIncrement()
     coutry: String
@@ -47,7 +56,7 @@ module StationWorkDatabase {
     amounts: Set<Amount>?
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type Meeting {
     @pk id: Uuid = generate_uuid()
     title: String
@@ -56,20 +65,20 @@ module StationWorkDatabase {
     date: LocalDateTime
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type ModeMeeting {
     @pk id: Int = autoIncrement()
     name: String
     meetings: Set<Meeting>?
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type MessageBoard {
     @pk id: Uuid = generate_uuid()
     messages: Set<Message>?
   }
 
-  @access(true)
+  @access(query=true, mutation=true, update=false)
   type Message {
     @pk id: Uuid = generate_uuid()
     title: String
